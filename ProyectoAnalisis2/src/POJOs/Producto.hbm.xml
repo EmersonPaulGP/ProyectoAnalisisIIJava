@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 7/10/2023 10:40:28 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOs.Producto" table="producto" catalog="proyectoanalisisii" optimistic-lock="version">
+        <id name="codigoProducto" type="java.lang.Integer">
+            <column name="CODIGO_PRODUCTO" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="usuarioByUsuarioModificacion" class="POJOs.Usuario" fetch="select">
+            <column name="USUARIO_MODIFICACION" />
+        </many-to-one>
+        <many-to-one name="usuarioByUsuarioIngreso" class="POJOs.Usuario" fetch="select">
+            <column name="USUARIO_INGRESO" />
+        </many-to-one>
+        <property name="estado" type="boolean">
+            <column name="ESTADO" not-null="true" />
+        </property>
+        <property name="nombreProducto" type="string">
+            <column name="NOMBRE_PRODUCTO" length="30" not-null="true" />
+        </property>
+        <property name="descripcionProducto" type="string">
+            <column name="DESCRIPCION_PRODUCTO" not-null="true" />
+        </property>
+        <property name="cantidadProducto" type="int">
+            <column name="CANTIDAD_PRODUCTO" not-null="true" />
+        </property>
+        <property name="precioProducto" type="big_decimal">
+            <column name="PRECIO_PRODUCTO" precision="10" not-null="true" />
+        </property>
+        <property name="fechaIngreso" type="timestamp">
+            <column name="FECHA_INGRESO" length="19" />
+        </property>
+        <property name="fechaModificacion" type="timestamp">
+            <column name="FECHA_MODIFICACION" length="19" />
+        </property>
+        <set name="detalleFacs" table="detalle_fac" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CODIGO_PRODUCTO" not-null="true" />
+            </key>
+            <one-to-many class="POJOs.DetalleFac" />
+        </set>
+    </class>
+</hibernate-mapping>

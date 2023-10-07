@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 7/10/2023 10:40:28 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOs.TipoPago" table="tipo_pago" catalog="proyectoanalisisii" optimistic-lock="version">
+        <id name="codigoPago" type="java.lang.Integer">
+            <column name="CODIGO_PAGO" />
+            <generator class="identity" />
+        </id>
+        <property name="formaPago" type="string">
+            <column name="FORMA_PAGO" length="45" not-null="true" />
+        </property>
+        <set name="detalleFacs" table="detalle_fac" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CODIGO_TIPO_PAGO" />
+            </key>
+            <one-to-many class="POJOs.DetalleFac" />
+        </set>
+    </class>
+</hibernate-mapping>

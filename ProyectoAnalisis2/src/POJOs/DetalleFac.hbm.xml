@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 7/10/2023 10:40:28 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOs.DetalleFac" table="detalle_fac" catalog="proyectoanalisisii" optimistic-lock="version">
+        <id name="noFactura" type="java.lang.Integer">
+            <column name="NO_FACTURA" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cliente" class="POJOs.Cliente" fetch="select">
+            <column name="CODIGO_CLIENTE" not-null="true" />
+        </many-to-one>
+        <many-to-one name="producto" class="POJOs.Producto" fetch="select">
+            <column name="CODIGO_PRODUCTO" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipoPago" class="POJOs.TipoPago" fetch="select">
+            <column name="CODIGO_TIPO_PAGO" />
+        </many-to-one>
+        <many-to-one name="usuarioByUsuarioModificacion" class="POJOs.Usuario" fetch="select">
+            <column name="USUARIO_MODIFICACION" />
+        </many-to-one>
+        <many-to-one name="usuarioByUsuarioIngreso" class="POJOs.Usuario" fetch="select">
+            <column name="USUARIO_INGRESO" />
+        </many-to-one>
+        <property name="estado" type="boolean">
+            <column name="ESTADO" not-null="true" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="FECHA" length="10" />
+        </property>
+        <property name="estadoFinalizado" type="java.lang.Boolean">
+            <column name="ESTADO_FINALIZADO" />
+        </property>
+        <property name="fechaIngreso" type="timestamp">
+            <column name="FECHA_INGRESO" length="19" />
+        </property>
+        <property name="fechaModificacion" type="timestamp">
+            <column name="FECHA_MODIFICACION" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>
